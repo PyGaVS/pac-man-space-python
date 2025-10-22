@@ -1,3 +1,3 @@
 SCREEN_WIDTH = 1560
 SCREEN_HEIGHT = 1080
-SCREEN_TITLE = "Titre de votre jeu"
+SCREEN_TITLE = "Pac-man space"
