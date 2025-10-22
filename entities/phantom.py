@@ -7,6 +7,7 @@ class Phantom(Entity):
         super().__init__()
         self.speed = 3
         self.name = "blinky"
+        self.direction = "L"
     
     def setDirection(self, direction):
         self.direction = direction

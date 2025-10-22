@@ -9,7 +9,7 @@ class Pinky(Phantom):
 
         self.sprite.texture = arcade.load_texture(f"assets/{self.name}/default/right/frame_1.gif")
         self.setAnimation()
-        self.sprite.position = (window.width - window.width/10, window.height - window.height/8)
+        self.sprite.position = (window.width - window.width/10, window.height - window.height/4)
         self.sprite.scale = 64 / self.sprite.width
 
 

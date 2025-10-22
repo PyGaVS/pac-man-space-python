@@ -18,8 +18,14 @@ class GameView(arcade.View):
         self.blinky = Blinky(self.window)
         self.pinky = Pinky(self.window)
 
-        self.sprite_list = arcade.SpriteList()
-        self.sprite_list.extend([self.player.sprite, self.blinky.sprite, self.pinky.sprite])
+        self.phantom_sprite_list = arcade.SpriteList()
+        self.phantom_sprite_list.extend([self.blinky.sprite, self.pinky.sprite])
+
+        self.player_sprite_list = arcade.SpriteList()
+        self.player_sprite_list.extend([self.player.sprite])
+
+        self.game_over = False
+        
 
 
         
@@ -31,7 +37,9 @@ class GameView(arcade.View):
             arcade.LBWH(0, 0, self.window.width, self.window.height),
         )
 
-        self.sprite_list.draw()
+
+        self.player_sprite_list.draw()
+        self.phantom_sprite_list.draw()
 
     def on_update(self, dt):
         self.frame = self.frame + 1 % 60
@@ -39,14 +47,22 @@ class GameView(arcade.View):
         self.blinky.animate(dt)
         self.pinky.animate(dt)
 
-        self.player.forward()
-        self.blinky.move(self.player, self.frame)
-        self.pinky.move(self.player, self.frame)
+
+        if self.game_over == False:
+            self.player.forward()
+            self.blinky.move(self.player, self.frame)
+            self.pinky.move(self.player, self.frame)
+
+        if(arcade.check_for_collision_with_list(self.player.sprite, self.phantom_sprite_list)):
+            self.game_over = True
         
 
     def on_key_press(self, key, modifiers):
         #self.input_manager.on_key_press(key)
         self.player.on_key_press(key)
+        if self.game_over:
+            newGame = GameView()
+            self.window.show_view(newGame)
 
     def on_key_release(self, key, modifiers):
         #self.input_manager.on_key_release(key)
