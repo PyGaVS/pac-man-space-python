@@ -49,7 +49,7 @@ class GameView(arcade.View):
 
 
         if self.game_over == False:
-            self.player.forward()
+            self.player.move()
             self.blinky.move(self.player, self.frame)
             self.pinky.move(self.player, self.frame)
 

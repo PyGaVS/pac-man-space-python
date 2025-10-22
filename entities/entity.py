@@ -1,5 +1,6 @@
 import arcade
 from utils.animation import Animation
+from core.settings import SCREEN_WIDTH, SCREEN_HEIGHT
 
 class Entity():
     def __init__(self):
@@ -25,3 +26,16 @@ class Entity():
         newFrame = self.animation.update(dt)
         if newFrame:
             self.sprite.texture = newFrame
+
+    def checkBorder(self):
+        if self.sprite.center_x + self.sprite.width/2 >= SCREEN_WIDTH:
+            self.setDirection("L")
+        elif self.sprite.center_x - self.sprite.width/2 <= 1:
+            self.setDirection("R")
+        elif self.sprite.center_y + self.sprite.height/2 >= SCREEN_HEIGHT:
+            self.setDirection("D")
+        elif self.sprite.center_y - self.sprite.height/2 <= 1:
+            self.setDirection("U")
+
+    def setDirection():
+        pass

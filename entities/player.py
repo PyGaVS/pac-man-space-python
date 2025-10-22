@@ -1,7 +1,6 @@
 import arcade
 from utils.animation import Animation
 from entities.entity import Entity
-
 class Player(Entity):
     def __init__(self, window):
         super().__init__()
@@ -23,14 +22,25 @@ class Player(Entity):
     
     def on_key_press(self, key):
         if key == arcade.key.RIGHT:
-            self.direction = "R"
-            self.sprite.angle = 0
+            self.setDirection("R")
         elif key == arcade.key.LEFT:
-            self.direction = "L"
-            self.sprite.angle = 180
+            self.setDirection("L")
         elif key == arcade.key.UP:
-            self.direction = "U"
-            self.sprite.angle = -90
+            self.setDirection("U")
         elif key == arcade.key.DOWN:
-            self.direction = "D"
-            self.sprite.angle = 90
+            self.setDirection("D")
+
+    def setDirection(self, d):
+        directions = {
+            "R": 0,
+            "L": 180,
+            "U": -90,
+            "D": 90
+        }
+
+        self.direction = d
+        self.sprite.angle = directions.get(d, 0)
+
+    def move(self):
+        self.checkBorder()
+        self.forward()
