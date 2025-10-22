@@ -7,13 +7,6 @@ class Phantom(Entity):
         super().__init__()
         self.speed = 3
         self.name = "blinky"
-
-        self.animation = Animation(
-            [
-                arcade.load_texture(f"assets/{self.name}/default/right/frame_0.gif"),
-                arcade.load_texture(f"assets/{self.name}/default/right/frame_1.gif")
-            ]
-        )
     
     def setDirection(self, direction):
         self.direction = direction
@@ -32,3 +25,12 @@ class Phantom(Entity):
                 self.setDirection("D")
             elif dy > 0:
                 self.setDirection("U")
+    
+    def setAnimation(self):
+        self.animation = Animation(
+            [
+                arcade.load_texture(f"assets/{self.name}/default/right/frame_0.gif"),
+                arcade.load_texture(f"assets/{self.name}/default/right/frame_1.gif")
+            ]
+        )
+        

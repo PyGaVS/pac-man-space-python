@@ -2,6 +2,7 @@ import arcade
 from managers.input_manager import InputManager
 from entities.player import Player
 from entities.blinky import Blinky
+from entities.pinky import Pinky
 
 class GameView(arcade.View):
     """Vue principale du jeu."""
@@ -15,8 +16,10 @@ class GameView(arcade.View):
 
         self.player = Player(self.window)
         self.blinky = Blinky(self.window)
+        self.pinky = Pinky(self.window)
+
         self.sprite_list = arcade.SpriteList()
-        self.sprite_list.extend([self.player.sprite, self.blinky.sprite])
+        self.sprite_list.extend([self.player.sprite, self.blinky.sprite, self.pinky.sprite])
 
 
         
@@ -34,8 +37,11 @@ class GameView(arcade.View):
         self.frame = self.frame + 1 % 60
         self.player.animate(dt)
         self.blinky.animate(dt)
+        self.pinky.animate(dt)
+
         self.player.forward()
         self.blinky.move(self.player, self.frame)
+        self.pinky.move(self.player, self.frame)
         
 
     def on_key_press(self, key, modifiers):
@@ -43,4 +49,5 @@ class GameView(arcade.View):
         self.player.on_key_press(key)
 
     def on_key_release(self, key, modifiers):
-        self.input_manager.on_key_release(key)
+        #self.input_manager.on_key_release(key)
+        pass
