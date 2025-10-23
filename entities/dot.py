@@ -2,6 +2,7 @@ import arcade
 from entities.entity import Entity
 from random import randint
 from core.settings import SCREEN_WIDTH, SCREEN_HEIGHT
+from utils.animation import Animation
 
 class Dot(Entity):
     def __init__(self, window, name):
@@ -15,6 +16,22 @@ class Dot(Entity):
         self.sprite.scale = 64 / self.sprite.width
         self.last = 0
         self.sprite.scale = 32 / self.sprite.width
+
+        colors = [
+            arcade.color.RED,
+            arcade.color.ORANGE,
+            arcade.color.YELLOW,
+            arcade.color.GREEN,
+            arcade.color.BLUE,
+            arcade.color.INDIGO,
+            arcade.color.VIOLET,
+        ]
+        
+        self.animation = Animation(
+            [arcade.make_circle_texture(32, color) for color in colors]
+        )
+        
+        
 
     def spawn(self, window):
         if self.sprite.visible:

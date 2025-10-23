@@ -56,6 +56,9 @@ class GameView(arcade.View):
 
         for phantom in self.phantoms:
             phantom.animate(dt)
+
+        for dot in self.dots:
+            dot.animate(dt)
         
         self.player.animate(dt)
         for dot in self.dots:
