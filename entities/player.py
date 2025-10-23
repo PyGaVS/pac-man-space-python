@@ -20,6 +20,7 @@ class Player(Entity):
         self.input = Input()
 
         self.speedBoost = 0
+        self.diagonal = ""
 
         self.animation = Animation(
             [
@@ -43,10 +44,14 @@ class Player(Entity):
             "R": 0,
             "L": 180,
             "U": -90,
-            "D": 90
+            "D": 90,
+            "RU": -45,
+            "LU": -135,
+            "LD": 135,
+            "RD": 45
         }
 
-        self.direction = d
+        if directions.get(d, -1) != -1: self.direction = d
         self.sprite.angle = directions.get(d, 0)
         self.speedBoost = 0
 
@@ -70,3 +75,5 @@ class Player(Entity):
     def applySpecial(self, special):
         if special == "speed":
             self.speedBoost = self.speed/2 + 1
+        if special in("RU", "LU", "LD", "RD"):
+            self.setDirection(special)

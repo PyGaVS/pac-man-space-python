@@ -17,7 +17,11 @@ class Entity():
             "R": (speed, 0),
             "L": (-speed, 0),
             "U": (0, speed),
-            "D": (0, -speed)
+            "D": (0, -speed),
+            "RU": ( speed,  speed),
+            "LU": (-speed,  speed),
+            "LD": (-speed, -speed),
+            "RD": ( speed, -speed),
         }
 
         dx, dy = moves.get(self.direction, (0, 0))
