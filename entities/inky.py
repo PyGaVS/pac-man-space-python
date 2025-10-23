@@ -12,7 +12,6 @@ class Inky(Phantom):
         self.sprite.position = (window.width - 140, window.height - 220)
         self.sprite.scale = 64 / self.sprite.width
 
-
     def move(self, player, frame, phantoms):
         if(frame % 30 == 0):
             self.chase(player, phantoms)
@@ -23,7 +22,6 @@ class Inky(Phantom):
     def chase(self, player, phantoms: Phantom):
         for phantom in phantoms:
             if(self.isCloseTo({"x": phantom.sprite.center_x, "y": phantom.sprite.center_y}) and phantom.name != "inky"):
-                print("aim away", phantom.name)
                 self.aimAway(phantom.sprite.center_x, phantom.sprite.center_y)
                 return
         

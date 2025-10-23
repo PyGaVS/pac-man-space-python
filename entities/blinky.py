@@ -1,5 +1,4 @@
 import arcade
-from utils.animation import Animation
 from entities.phantom import Phantom
 
 class Blinky(Phantom):
@@ -11,7 +10,6 @@ class Blinky(Phantom):
         self.setAnimation()
         self.sprite.position = (window.width - 140, window.height - 70)
         self.sprite.scale = 64 / self.sprite.width
-
 
     def move(self, player, frame):
         if(frame % 15 == 0):

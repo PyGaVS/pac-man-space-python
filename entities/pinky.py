@@ -12,7 +12,6 @@ class Pinky(Phantom):
         self.sprite.position = (window.width - 290, window.height - 220)
         self.sprite.scale = 64 / self.sprite.width
 
-
     def move(self, player, frame):
         if(frame % 30 == 0):
             self.chase(player)

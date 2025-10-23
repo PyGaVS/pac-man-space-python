@@ -5,6 +5,7 @@ from entities.blinky import Blinky
 from entities.pinky import Pinky
 from entities.inky import Inky
 from entities.clyde import Clyde
+from entities.dot import Dot
 
 class GameView(arcade.View):
     """Vue principale du jeu."""
@@ -23,13 +24,14 @@ class GameView(arcade.View):
         self.clyde = Clyde(self.window)
 
         self.phantoms = [self.blinky, self.pinky, self.inky, self.clyde]
+        self.dots = [Dot(self.window, "dot1"), Dot(self.window, "dot2")]
 
 
         self.phantom_sprite_list = arcade.SpriteList()
         self.phantom_sprite_list.extend([self.blinky.sprite, self.pinky.sprite, self.inky.sprite, self.clyde.sprite])
 
         self.player_sprite_list = arcade.SpriteList()
-        self.player_sprite_list.extend([self.player.sprite])
+        self.player_sprite_list.extend([self.player.sprite] + [dot.sprite for dot in self.dots])
 
         self.game_over = False
         
@@ -47,6 +49,7 @@ class GameView(arcade.View):
 
         self.player_sprite_list.draw()
         self.phantom_sprite_list.draw()
+        arcade.draw_text(f"Score {self.player.score}", 50, self.window.height-50, arcade.color.WHITE, 40)
 
     def on_update(self, dt):
         self.frame = self.frame + 1 % 60
@@ -55,8 +58,10 @@ class GameView(arcade.View):
             phantom.animate(dt)
         
         self.player.animate(dt)
+        for dot in self.dots:
+            dot.spawn(self.window) 
         
-        if self.game_over == False:
+        if not self.game_over:
             self.player.move()
             self.blinky.move(self.player, self.frame)
             self.pinky.move(self.player, self.frame)
@@ -65,6 +70,13 @@ class GameView(arcade.View):
 
         if(arcade.check_for_collision_with_list(self.player.sprite, self.phantom_sprite_list)):
             self.game_over = True
+
+        for dot in self.dots:
+            if arcade.check_for_collision(self.player.sprite, dot.sprite):
+                if dot.sprite.visible:
+                    self.setScore(self.player.score + 1)
+                    dot.despawn()
+
         
 
     def on_key_press(self, key, modifiers):
@@ -77,3 +89,11 @@ class GameView(arcade.View):
     def on_key_release(self, key, modifiers):
         #self.input_manager.on_key_release(key)
         pass
+
+    def setScore(self, score):
+        self.player.score = score
+        for phantom in self.phantoms: phantom.speed += 0.1
+        
+        if score % 4 == 0:
+            self.player.speed += 0.4
+            for phantom in self.phantoms: phantom.speed += 0.1

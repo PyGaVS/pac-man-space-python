@@ -5,7 +5,7 @@ from entities.entity import Entity
 class Phantom(Entity):
     def __init__(self):
         super().__init__()
-        self.speed = 3
+        self.speed = 2
         self.name = "blinky"
         self.direction = "L"
     
