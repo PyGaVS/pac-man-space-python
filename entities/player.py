@@ -1,7 +1,11 @@
 import arcade
 from utils.animation import Animation
 from entities.entity import Entity
+import utils.game_globals
+from utils.input import Input
+
 class Player(Entity):
+
     def __init__(self, window):
         super().__init__()
 
@@ -13,6 +17,9 @@ class Player(Entity):
         self.speed = 6
         self.name = "player"
         self.score = 0
+        self.input = Input()
+
+        self.speedBoost = 0
 
         self.animation = Animation(
             [
@@ -23,14 +30,13 @@ class Player(Entity):
         )
     
     def on_key_press(self, key):
-        if key == arcade.key.RIGHT:
-            self.setDirection("R")
-        elif key == arcade.key.LEFT:
-            self.setDirection("L")
-        elif key == arcade.key.UP:
-            self.setDirection("U")
-        elif key == arcade.key.DOWN:
-            self.setDirection("D")
+        input = self.getInput(key)
+
+        self.setDirection(input)
+        special = self.input.addInput(input)
+
+        self.applySpecial(special)
+
 
     def setDirection(self, d):
         directions = {
@@ -42,7 +48,25 @@ class Player(Entity):
 
         self.direction = d
         self.sprite.angle = directions.get(d, 0)
+        self.speedBoost = 0
 
     def move(self):
         self.checkBorder()
-        self.forward()
+        self.forward(self.speedBoost)
+    
+    def getInput(self, key):
+        input = ""
+        if key == arcade.key.RIGHT:
+            input = "R"
+        elif key == arcade.key.LEFT:
+            input = "L"
+        elif key == arcade.key.UP:
+            input = "U"
+        elif key == arcade.key.DOWN:
+            input = "D"
+        
+        return input
+    
+    def applySpecial(self, special):
+        if special == "speed":
+            self.speedBoost = self.speed/2 + 1

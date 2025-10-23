@@ -6,6 +6,7 @@ from entities.pinky import Pinky
 from entities.inky import Inky
 from entities.clyde import Clyde
 from entities.dot import Dot
+import utils.game_globals as game_globals
 
 class GameView(arcade.View):
     """Vue principale du jeu."""
@@ -23,6 +24,7 @@ class GameView(arcade.View):
         self.inky = Inky(self.window)
         self.clyde = Clyde(self.window)
 
+
         self.phantoms = [self.blinky, self.pinky, self.inky, self.clyde]
         self.dots = [Dot(self.window, "dot1"), Dot(self.window, "dot2")]
 
@@ -34,6 +36,7 @@ class GameView(arcade.View):
         self.player_sprite_list.extend([self.player.sprite] + [dot.sprite for dot in self.dots])
 
         self.game_over = False
+        self.input_time = 0.0
         
 
 
@@ -50,8 +53,16 @@ class GameView(arcade.View):
         self.player_sprite_list.draw()
         self.phantom_sprite_list.draw()
         arcade.draw_text(f"Score {self.player.score}", 50, self.window.height-50, arcade.color.WHITE, 20)
+        arcade.draw_text(self.player.input.getHistory(), 50, self.window.height-100, arcade.color.WHITE, 20)
 
     def on_update(self, dt):
+        game_globals.time += dt
+        self.input_time += dt
+
+        if self.input_time >= 0.2:
+            self.input_time = 0.0
+            self.player.input.addInput("N")
+
         self.frame = self.frame + 1 % 60
 
         for phantom in self.phantoms:
@@ -85,6 +96,7 @@ class GameView(arcade.View):
     def on_key_press(self, key, modifiers):
         #self.input_manager.on_key_press(key)
         self.player.on_key_press(key)
+        self.input_time = 0.0
         if self.game_over:
             newGame = GameView()
             self.window.show_view(newGame)

@@ -11,16 +11,17 @@ class Entity():
         self.name=""
 
     
-    def forward(self):
+    def forward(self, boost = 0):
+        speed = self.speed + boost
         moves = {
-            "R": (self.speed, 0),
-            "L": (-self.speed, 0),
-            "U": (0, self.speed),
-            "D": (0, -self.speed)
+            "R": (speed, 0),
+            "L": (-speed, 0),
+            "U": (0, speed),
+            "D": (0, -speed)
         }
 
         dx, dy = moves.get(self.direction, (0, 0))
-        self.sprite.center_x += dx
+        self.sprite.center_x += dx 
         self.sprite.center_y += dy
 
     def animate(self, dt):
