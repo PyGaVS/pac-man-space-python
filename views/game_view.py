@@ -49,7 +49,7 @@ class GameView(arcade.View):
 
         self.player_sprite_list.draw()
         self.phantom_sprite_list.draw()
-        arcade.draw_text(f"Score {self.player.score}", 50, self.window.height-50, arcade.color.WHITE, 40)
+        arcade.draw_text(f"Score {self.player.score}", 50, self.window.height-50, arcade.color.WHITE, 20)
 
     def on_update(self, dt):
         self.frame = self.frame + 1 % 60
