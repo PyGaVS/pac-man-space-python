@@ -4,6 +4,7 @@ from entities.player import Player
 from entities.blinky import Blinky
 from entities.pinky import Pinky
 from entities.inky import Inky
+from entities.clyde import Clyde
 
 class GameView(arcade.View):
     """Vue principale du jeu."""
@@ -19,12 +20,13 @@ class GameView(arcade.View):
         self.blinky = Blinky(self.window)
         self.pinky = Pinky(self.window)
         self.inky = Inky(self.window)
+        self.clyde = Clyde(self.window)
 
-        self.phantoms = [self.blinky, self.pinky]
+        self.phantoms = [self.blinky, self.pinky, self.inky, self.clyde]
 
 
         self.phantom_sprite_list = arcade.SpriteList()
-        self.phantom_sprite_list.extend([self.blinky.sprite, self.pinky.sprite, self.inky.sprite])
+        self.phantom_sprite_list.extend([self.blinky.sprite, self.pinky.sprite, self.inky.sprite, self.clyde.sprite])
 
         self.player_sprite_list = arcade.SpriteList()
         self.player_sprite_list.extend([self.player.sprite])
@@ -59,6 +61,7 @@ class GameView(arcade.View):
             self.blinky.move(self.player, self.frame)
             self.pinky.move(self.player, self.frame)
             self.inky.move(self.player, self.frame, self.phantoms)
+            self.clyde.move(self.player, self.frame)
 
         if(arcade.check_for_collision_with_list(self.player.sprite, self.phantom_sprite_list)):
             self.game_over = True

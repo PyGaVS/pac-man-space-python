@@ -14,7 +14,7 @@ class Inky(Phantom):
 
 
     def move(self, player, frame, phantoms):
-        if(frame % 15 == 0):
+        if(frame % 30 == 0):
             self.chase(player, phantoms)
         
         self.checkBorder()
@@ -22,7 +22,7 @@ class Inky(Phantom):
     
     def chase(self, player, phantoms: Phantom):
         for phantom in phantoms:
-            if(self.isCloseTo({"x": phantom.sprite.center_x, "y": phantom.sprite.center_y})):
+            if(self.isCloseTo({"x": phantom.sprite.center_x, "y": phantom.sprite.center_y}) and phantom.name != "inky"):
                 print("aim away", phantom.name)
                 self.aimAway(phantom.sprite.center_x, phantom.sprite.center_y)
                 return

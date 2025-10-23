@@ -12,6 +12,7 @@ class Player(Entity):
         self.sprite.scale = 64 / self.sprite.width
         self.speed = 6
         self.name = "player"
+        self.score = 0
 
         self.animation = Animation(
             [

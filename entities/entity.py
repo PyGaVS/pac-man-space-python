@@ -41,5 +41,5 @@ class Entity():
     def setDirection():
         pass
 
-    def isCloseTo(self, pos, range = 1500):
+    def isCloseTo(self, pos, range = 150):
         return abs(self.sprite.center_x - pos["x"]) < range and abs(self.sprite.center_y - pos["y"]) < range
