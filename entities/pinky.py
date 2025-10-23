@@ -9,7 +9,7 @@ class Pinky(Phantom):
 
         self.sprite.texture = arcade.load_texture(f"assets/{self.name}/default/right/frame_1.gif")
         self.setAnimation()
-        self.sprite.position = (window.width - window.width/10, window.height - window.height/4)
+        self.sprite.position = (window.width - 290, window.height - 220)
         self.sprite.scale = 64 / self.sprite.width
 
 
@@ -17,11 +17,12 @@ class Pinky(Phantom):
         if(frame % 30 == 0):
             self.chase(player)
 
+        self.checkBorder()
         self.forward()
     
     def chase(self, player):
         targetX, targetY = player.sprite.center_x, player.sprite.center_y
-        targetRange = self.getTargetRange(player.sprite.center_x, player.sprite.center_y, 400)
+        targetRange = self.getTargetRange(player.sprite.center_x, player.sprite.center_y, 500)
 
 
         moves = {

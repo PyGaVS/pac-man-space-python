@@ -9,14 +9,15 @@ class Blinky(Phantom):
 
         self.sprite.texture = arcade.load_texture(f"assets/{self.name}/default/right/frame_1.gif")
         self.setAnimation()
-        self.sprite.position = (window.width - window.width/10, window.height - window.height/10)
+        self.sprite.position = (window.width - 140, window.height - 70)
         self.sprite.scale = 64 / self.sprite.width
 
 
     def move(self, player, frame):
         if(frame % 15 == 0):
             self.chase(player)
-
+        
+        self.checkBorder()
         self.forward()
     
     def chase(self, player):

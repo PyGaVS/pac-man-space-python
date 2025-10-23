@@ -24,7 +24,22 @@ class Phantom(Entity):
         else:
             if dy < 0:
                 self.setDirection("D")
-            elif dy > 0:
+            else:
+                self.setDirection("U")
+
+    def aimAway(self, x, y):
+        dx = x - self.sprite.center_x
+        dy = y - self.sprite.center_y
+
+        if abs(dx) <= abs(dy):
+            if dx > 0:
+                self.setDirection("L")
+            else:
+                self.setDirection("R")
+        else:
+            if dy > 0:
+                self.setDirection("D")
+            else:
                 self.setDirection("U")
     
     def setAnimation(self):

@@ -8,6 +8,7 @@ class Entity():
         self.sprite = arcade.Sprite()
         self.speed = 5
         self.animation = Animation([])
+        self.name=""
 
     
     def forward(self):
@@ -39,3 +40,6 @@ class Entity():
 
     def setDirection():
         pass
+
+    def isCloseTo(self, pos, range = 1500):
+        return abs(self.sprite.center_x - pos["x"]) < range and abs(self.sprite.center_y - pos["y"]) < range

@@ -11,6 +11,7 @@ class Player(Entity):
         self.sprite.position = (window.width/10, window.height/10)
         self.sprite.scale = 64 / self.sprite.width
         self.speed = 6
+        self.name = "player"
 
         self.animation = Animation(
             [

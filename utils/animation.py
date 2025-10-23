@@ -13,7 +13,6 @@ class Animation():
 
     def update(self, dt: float):
         self.last += dt
-        
         if self.last >= self.frame_duration:
             self.last = 0.0
             self.current = (self.current + 1) % len(self.frames)
