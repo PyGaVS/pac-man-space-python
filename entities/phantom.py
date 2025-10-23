@@ -10,6 +10,15 @@ class Phantom(Entity):
         self.direction = "L"
     
     def setDirection(self, direction):
+        if direction == "L":
+            self.animation = Animation(self.textures["left"])
+        elif direction == "R":
+            self.animation = Animation(self.textures["right"])
+        elif direction == "D":
+            self.animation = Animation(self.textures["down"])
+        elif direction == "U":
+            self.animation = Animation(self.textures["up"])
+
         self.direction = direction
 
     def aim(self, x, y):
@@ -43,10 +52,20 @@ class Phantom(Entity):
                 self.setDirection("U")
     
     def setAnimation(self):
-        self.animation = Animation(
-            [
-                arcade.load_texture(f"assets/{self.name}/default/right/frame_0.gif"),
-                arcade.load_texture(f"assets/{self.name}/default/right/frame_1.gif")
-            ]
-        )
+        self.textures = {}
+        for d in ["right", "up", "down", "left"]:
+            if d == "left":
+                self.textures[d] = [
+                    arcade.load_texture(f"assets/{self.name}/default/right/frame_0.gif"),
+                    arcade.load_texture(f"assets/{self.name}/default/right/frame_1.gif"),
+                ]
+
+                self.textures[d] = [texture.flip_horizontally() for texture in self.textures[d]]
+            else:
+                self.textures[d] = [
+                    arcade.load_texture(f"assets/{self.name}/default/{d}/frame_0.gif"),
+                    arcade.load_texture(f"assets/{self.name}/default/{d}/frame_1.gif"),
+                ]
+
+        self.animation = Animation(self.textures["left"])
         

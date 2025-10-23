@@ -9,7 +9,7 @@ class Clyde(Phantom):
 
         self.sprite.texture = arcade.load_texture(f"assets/{self.name}/default/right/frame_1.gif")
         self.setAnimation()
-        self.sprite.position = (window.width - 140, window.height - 220)
+        self.sprite.position = (window.width - 290, window.height - 70)
         self.sprite.scale = 64 / self.sprite.width
 
 
