@@ -1,7 +1,7 @@
 # Jeu de gestion - Python 
 Jeu réalisé dans le cadre d'un apprentissage en CDA 
 
-# 🧩 Contexte
+# 👾 Contexte
 Pac-man space
 Le joueur doit contrôler Pac-man pour éviter les Fantômes et récuperer un maximum de pac-gommes avec une difficulté croissante.
 
@@ -22,7 +22,7 @@ Le joueur doit contrôler Pac-man pour éviter les Fantômes et récuperer un ma
     - **🡆 + 🡅 + 🡆 + 🡅 (ou autre diagonales) :** pour se déplacer en diagonale avec un léger boost de vitesse
     - **🡄 + 🡄 + 🡆 (ou autre séquences) :** pour se déplacer plus vite
 
-# 🧠 Améliorations possibles
+# 🔮 Améliorations possibles
 - Ajouter une vue d’aide affichant les contrôles et les combinaisons spéciales.
 - Intégrer un système d’attaque permettant de vaincre les fantômes.
 - Créer un téléporteur pour traverser les bords de l’écran.
