@@ -59,7 +59,7 @@ class GameView(arcade.View):
         game_globals.time += dt
         self.input_time += dt
 
-        if self.input_time >= 0.2:
+        if self.input_time >= 0.25:
             self.input_time = 0.0
             self.player.input.addInput("N")
 

@@ -45,7 +45,7 @@ class Input():
         str=""
 
         for input in self.history:
-            str = str + " " + symbols.get(input, "⏹️")
+            str = str + " " + symbols.get(input, " ")
 
         return str
     

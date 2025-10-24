@@ -21,7 +21,7 @@ class Pinky(Phantom):
     
     def chase(self, player):
         targetX, targetY = player.sprite.center_x, player.sprite.center_y
-        targetRange = self.getTargetRange(player.sprite.center_x, player.sprite.center_y, 600)
+        targetRange = self.getTargetRange(player.sprite.center_x, player.sprite.center_y, 400)
 
 
         moves = {
